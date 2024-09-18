@@ -1,0 +1,17 @@
+{
+    "name": "rum-events-schema",
+    "version": "1.0.0",
+    "description": "JSON schema of guance RUM events",
+    "private": true,
+    "main": "cjs/src/index.js",
+    "types": "cjs/src/index.d.ts",
+    "module": "esm/src/index.js",
+    "files": [
+        "cjs",
+        "esm",
+        "session-replay",
+        "session-replay-browser",
+        "session-replay-mobile",
+        "dashboar-charts"
+    ]
+}
