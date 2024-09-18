@@ -1,0 +1,2841 @@
+{
+  "title": "dcl-test1",
+  "dashboardType": "CUSTOM",
+  "dashboardExtend": {
+    "groupUnfoldStatus": {
+      "表格图": true
+    }
+  },
+  "dashboardMapping": [],
+  "dashboardOwnerType": "node",
+  "iconSet": {},
+  "dashboardBindSet": [],
+  "thumbnail": "",
+  "tagInfo": [],
+  "summary": "",
+  "main": {
+    "vars": [
+      {
+        "name": "指标",
+        "seq": 0,
+        "datasource": "ftinfluxdb",
+        "code": "host",
+        "type": "TAG",
+        "definition": {
+          "tag": "host",
+          "field": "",
+          "value": "",
+          "metric": "cpu",
+          "object": "",
+          "defaultVal": {
+            "label": "izbp152ke14timzud0du15z,myClient111",
+            "value": "izbp152ke14timzud0du15z,myClient111"
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "DQL",
+        "seq": 1,
+        "datasource": "dataflux",
+        "code": "host1",
+        "type": "QUERY",
+        "definition": {
+          "tag": "",
+          "field": "",
+          "value": "xxxxxxx",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "基础对象",
+        "seq": 2,
+        "datasource": "object",
+        "code": "test3",
+        "type": "FIELD",
+        "definition": {
+          "tag": "",
+          "field": "host",
+          "value": "",
+          "metric": "",
+          "object": "host_processes",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "资源目录",
+        "seq": 3,
+        "datasource": "custom_object",
+        "code": "test4",
+        "type": "FIELD",
+        "definition": {
+          "tag": "",
+          "field": "RegionId",
+          "value": "",
+          "metric": "",
+          "object": "aws_ecs",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "PromQL",
+        "seq": 4,
+        "datasource": "dataflux",
+        "code": "test5",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "tag": "",
+          "field": "",
+          "value": "xxxxx",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "日志",
+        "seq": 5,
+        "datasource": "dataflux",
+        "code": "test6",
+        "type": "LOGGING",
+        "definition": {
+          "tag": "",
+          "field": "host",
+          "value": "",
+          "metric": "calico-node",
+          "object": "",
+          "logIndex": "test_index61802",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "应用性能",
+        "seq": 6,
+        "datasource": "dataflux",
+        "code": "test7",
+        "type": "TRACING",
+        "definition": {
+          "tag": "",
+          "field": "host",
+          "value": "",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "用户访问",
+        "seq": 7,
+        "datasource": "dataflux",
+        "code": "test8",
+        "type": "RUM",
+        "definition": {
+          "tag": "",
+          "field": "action_id",
+          "value": "",
+          "metric": "action",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "安全巡检",
+        "seq": 8,
+        "datasource": "dataflux",
+        "code": "test9",
+        "type": "SECURITY",
+        "definition": {
+          "tag": "",
+          "field": "status",
+          "value": "",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "自定义",
+        "seq": 9,
+        "datasource": "custom",
+        "code": "test10",
+        "type": "CUSTOM_LIST",
+        "definition": {
+          "tag": "",
+          "field": "",
+          "value": "aaa,ssss",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      }
+    ],
+    "charts": [
+      {
+        "extend": {
+          "settings": {
+            "alias": [
+              {
+                "key": "avg(load5s)",
+                "name": "avg(load5s)",
+                "alias": "{{tags}}"
+              }
+            ],
+            "units": [
+              {
+                "key": "avg(load5s)",
+                "name": "avg(load5s)",
+                "unit": "ddd",
+                "units": [
+                  "custom",
+                  "ddd"
+                ]
+              },
+              {
+                "key": "",
+                "name": "",
+                "unit": "",
+                "units": [
+                  "custom",
+                  ""
+                ]
+              }
+            ],
+            "colors": [
+              {
+                "key": "avg(load5s)",
+                "name": "avg(load5s)",
+                "color": "#498BFE"
+              }
+            ],
+            "levels": [],
+            "slimit": 20,
+            "showLine": false,
+            "unitType": "custom",
+            "chartType": "bar",
+            "fixedTime": "",
+            "isPercent": false,
+            "openStack": true,
+            "precision": "2",
+            "showLabel": false,
+            "showTitle": true,
+            "stackType": "time",
+            "titleDesc": "",
+            "globalUnit": [
+              "digital",
+              "b"
+            ],
+            "isSampling": true,
+            "compareType": [],
+            "openCompare": false,
+            "yAxixMaxVal": null,
+            "yAxixMinVal": null,
+            "aliasVersion": 2,
+            "connectNulls": true,
+            "legendValues": [
+              "first",
+              "last"
+            ],
+            "timeInterval": "auto",
+            "legendPostion": "bottom",
+            "maxPointCount": null,
+            "sorderByOrder": "desc",
+            "xAxisShowType": "time",
+            "isTimeInterval": true,
+            "changeWorkspace": false,
+            "currentChartType": "sequence",
+            "showFieldMapping": false,
+            "onlyShowGroupName": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "时序图"
+        },
+        "name": "时序折线图",
+        "pos": {
+          "h": 12,
+          "w": 8,
+          "x": 0,
+          "y": 0
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "name": "",
+            "type": "sequence",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "showLine": false,
+            "unitType": "global",
+            "chartType": "areaLine",
+            "fixedTime": "",
+            "isPercent": false,
+            "openStack": false,
+            "precision": "2",
+            "showLabel": false,
+            "showTitle": true,
+            "stackType": "time",
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "compareType": [],
+            "openCompare": false,
+            "yAxixMaxVal": null,
+            "yAxixMinVal": null,
+            "connectNulls": true,
+            "legendValues": "",
+            "timeInterval": "auto",
+            "legendPostion": "none",
+            "maxPointCount": null,
+            "sorderByOrder": "desc",
+            "xAxisShowType": "time",
+            "isTimeInterval": true,
+            "changeWorkspace": false,
+            "currentChartType": "sequence",
+            "showFieldMapping": false,
+            "onlyShowGroupName": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": ""
+        },
+        "group": {
+          "name": "时序图"
+        },
+        "name": "时序面积图",
+        "pos": {
+          "h": 12,
+          "w": 8,
+          "x": 8,
+          "y": 0
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "name": "",
+            "type": "sequence",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "showLine": false,
+            "unitType": "global",
+            "chartType": "bar",
+            "fixedTime": "",
+            "isPercent": false,
+            "openStack": false,
+            "precision": "2",
+            "showLabel": false,
+            "showTitle": true,
+            "stackType": "time",
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "compareType": [],
+            "openCompare": false,
+            "yAxixMaxVal": null,
+            "yAxixMinVal": null,
+            "connectNulls": true,
+            "legendValues": "",
+            "timeInterval": "auto",
+            "legendPostion": "none",
+            "maxPointCount": null,
+            "sorderByOrder": "desc",
+            "xAxisShowType": "time",
+            "isTimeInterval": true,
+            "changeWorkspace": false,
+            "currentChartType": "sequence",
+            "showFieldMapping": false,
+            "onlyShowGroupName": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": ""
+        },
+        "group": {
+          "name": "时序图"
+        },
+        "name": "时序柱状图",
+        "pos": {
+          "h": 12,
+          "w": 8,
+          "x": 16,
+          "y": 0
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "name": "",
+            "type": "sequence",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [
+              {
+                "value": [
+                  "2"
+                ],
+                "bgColor": "#5F67D6",
+                "fontColor": "#2D8CF0",
+                "lineColor": "",
+                "operation": "="
+              }
+            ],
+            "bgColor": "#5F67D6",
+            "compares": [
+              {
+                "label": "小时同比",
+                "value": "hourCompare"
+              },
+              {
+                "label": "日同比",
+                "value": "dayCompare"
+              }
+            ],
+            "mappings": [
+              {
+                "operation": "=",
+                "mappingVal": "2222",
+                "originalVal": [
+                  "2"
+                ]
+              }
+            ],
+            "showLine": true,
+            "unitType": "global",
+            "fixedTime": "",
+            "fontColor": "#F97575",
+            "lineColor": "#3AB8FF",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "downsample": "last",
+            "globalUnit": [],
+            "isSampling": true,
+            "compareType": [
+              "hourCompare",
+              "dayCompare"
+            ],
+            "openCompare": true,
+            "showLineAxis": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "compareChartType": "singlestat",
+            "currentChartType": "singlestat",
+            "showFieldMapping": false,
+            "sequenceChartType": "bar",
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": true
+        },
+        "group": {
+          "name": "概览图"
+        },
+        "name": "概览图",
+        "pos": {
+          "h": 9,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "name": "",
+            "type": "singlestat",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "combine": {
+              "percent": "12",
+              "operator": "lt"
+            },
+            "percent": "12",
+            "operator": "lt",
+            "unitType": "global",
+            "chartType": "pie",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "undefined": "percent:12",
+            "globalUnit": [],
+            "isSampling": true,
+            "otherColor": "#F56610",
+            "timeInterval": "auto",
+            "enableCombine": true,
+            "legendPostion": "bottom",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "pie",
+            "showFieldMapping": false,
+            "onlyShowGroupName": false,
+            "mainMeasurementSort": "top",
+            "mainMeasurementLimit": 20,
+            "openThousandsSeparator": true,
+            "chartCombineDefaultColor": "#F56610",
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "饼图"
+        },
+        "name": "饼图",
+        "pos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "pie",
+        "queries": [
+          {
+            "name": "",
+            "type": "pie",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "topSize": 10,
+            "showLine": false,
+            "unitType": "global",
+            "direction": "horizontal",
+            "fixedTime": "",
+            "openStack": true,
+            "precision": "2",
+            "showTitle": true,
+            "stackType": "percent",
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "openCompare": false,
+            "showTopSize": false,
+            "stackContent": "index",
+            "timeInterval": "auto",
+            "xAxisShowType": "groupBy",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "bar",
+            "showFieldMapping": false,
+            "showTopWithMetric": "",
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "柱状图"
+        },
+        "name": "柱状图",
+        "pos": {
+          "h": 11,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "type": "bar",
+        "queries": [
+          {
+            "name": "",
+            "type": "bar",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [
+              {
+                "key": "avg(load5s){host: myClient111}",
+                "name": "avg(load5s){host: myClient111}",
+                "alias": "1sadfasdfasdfsadfasdfasdfsadfasdfasdfsadfasdfasdfsadfasdfasdf"
+              }
+            ],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "topSize": 10,
+            "showLine": false,
+            "unitType": "global",
+            "direction": "horizontal",
+            "fixedTime": "",
+            "openStack": false,
+            "precision": "2",
+            "showTitle": true,
+            "stackType": "time",
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "openCompare": false,
+            "showTopSize": false,
+            "aliasVersion": 2,
+            "stackContent": "group",
+            "timeInterval": "auto",
+            "xAxisShowType": "groupBy",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "bar",
+            "showFieldMapping": false,
+            "showTopWithMetric": "",
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "柱状图"
+        },
+        "name": "条形图",
+        "pos": {
+          "h": 11,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "type": "bar",
+        "queries": [
+          {
+            "name": "",
+            "type": "bar",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "chartType": "histogram",
+            "direction": "vertical",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "legendPostion": "none",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "histogram",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "直方图"
+        },
+        "name": "直方图",
+        "pos": {
+          "h": 12,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "histogram",
+        "queries": [
+          {
+            "name": "",
+            "type": "histogram",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "L('default')::RE(`.*`):(count(`field_int`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "field_int",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "count",
+              "fieldType": "long",
+              "namespace": "logging",
+              "dataSource": "*",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "default",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "bar": {
+              "direction": "horizontal",
+              "xAxisShowType": "groupBy"
+            },
+            "alias": [],
+            "color": "#498bfe",
+            "table": {
+              "queryMode": "toGroupColumn"
+            },
+            "units": [],
+            "colors": [],
+            "levels": [
+              {
+                "title": "2",
+                "value": 1,
+                "bgColor": "#498BFE"
+              }
+            ],
+            "slimit": 20,
+            "topSize": 10,
+            "unitType": "global",
+            "chartType": "bar",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "undefined": [],
+            "globalUnit": [],
+            "isSampling": true,
+            "openCompare": false,
+            "showTopSize": true,
+            "timeInterval": "auto",
+            "colorMappings": [
+              {
+                "value": [
+                  1,
+                  1
+                ],
+                "bgColor": "",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "between"
+              }
+            ],
+            "showTableHead": true,
+            "tableSortType": "top",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "toplist",
+            "showFieldMapping": false,
+            "mainMeasurementSort": "top",
+            "tableSortMetricName": "",
+            "mainMeasurementLimit": 20,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "排行榜"
+        },
+        "name": "排行榜",
+        "pos": {
+          "h": 14,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "toplist",
+        "queries": [
+          {
+            "name": "",
+            "type": "toplist",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "max": 100,
+            "min": 0,
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [
+              {
+                "value": [
+                  20
+                ],
+                "lineColor": "#498BFE",
+                "operation": "<="
+              },
+              {
+                "value": [
+                  80
+                ],
+                "lineColor": "#41CEC7",
+                "operation": "<="
+              },
+              {
+                "value": [
+                  100
+                ],
+                "lineColor": "#FFBD5F",
+                "operation": "<="
+              }
+            ],
+            "unitType": "global",
+            "fixedTime": "",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "gauge",
+            "showFieldMapping": false
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "仪表板"
+        },
+        "name": "仪表盘",
+        "pos": {
+          "h": 15,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "gauge",
+        "queries": [
+          {
+            "name": "",
+            "type": "gauge",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "xQuery": {
+              "name": "",
+              "index": null
+            },
+            "yQuery": {
+              "name": "",
+              "index": null
+            },
+            "unitType": "global",
+            "chartType": "",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "bubbleSizeQuery": {
+              "name": "",
+              "index": null
+            },
+            "changeWorkspace": false,
+            "showFieldMapping": false,
+            "openThousandsSeparator": true
+          },
+          "fixedTime": ""
+        },
+        "group": {
+          "name": "散点图"
+        },
+        "name": "散点图",
+        "pos": {
+          "h": 14,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "scatter",
+        "queries": [
+          {
+            "name": "",
+            "type": "scatter",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "x",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "dql.x_axis"
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "type": "scatter",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`usage_idle`)) BY `host`",
+              "code": "y",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "usage_idle",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "dql.y_axis"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "xQuery": {
+              "name": "",
+              "index": null
+            },
+            "yQuery": {
+              "name": "",
+              "index": null
+            },
+            "unitType": "global",
+            "chartType": "",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "bubbleSizeQuery": {
+              "name": "",
+              "index": null
+            },
+            "changeWorkspace": false,
+            "currentChartType": "bubble",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "气泡图"
+        },
+        "name": "气泡图",
+        "pos": {
+          "h": 14,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "bubble",
+        "queries": [
+          {
+            "name": "",
+            "type": "bubble",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "x",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "dql.x_axis"
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "type": "bubble",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`usage_idle`)) BY `host`",
+              "code": "y",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "usage_idle",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "dql.y_axis"
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "type": "bubble",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`usage_irq`)) BY `host`",
+              "code": "size",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "usage_irq",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "dql.size"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [
+              {
+                "key": "first(mem_used_percent)",
+                "name": "first(mem_used_percent)",
+                "unit": "",
+                "units": [
+                  "percent",
+                  "percent"
+                ]
+              }
+            ],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "pageSize": 0,
+            "unitType": "custom",
+            "fixedTime": "",
+            "precision": "2",
+            "queryMode": "toGroupColumn",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "showColumns": [],
+            "valMappings": [
+              {
+                "field": "first(mem_used_percent)",
+                "operation": "=",
+                "mappingVal": "333",
+                "originalVal": [
+                  "0"
+                ]
+              }
+            ],
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "disableFuncList": false,
+            "currentChartType": "table",
+            "showFieldMapping": false,
+            "valColorMappings": [
+              {
+                "field": "first(mem_used_percent)",
+                "value": [
+                  "0"
+                ],
+                "bgColor": "",
+                "fontColor": "",
+                "lineColor": "",
+                "operation": "="
+              }
+            ],
+            "mainMeasurementSort": "top",
+            "mainMeasurementLimit": 20,
+            "openThousandsSeparator": false,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "表格图"
+        },
+        "name": "分组表格图",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "type": "table",
+        "queries": [
+          {
+            "name": "",
+            "type": "table",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "O::`HOST`:(first(`mem_used_percent`)) BY `host`",
+              "code": "A",
+              "fill": "",
+              "type": "simple",
+              "alias": "",
+              "field": "mem_used_percent",
+              "search": "",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "first",
+              "fieldType": "double",
+              "namespace": "object",
+              "dataSource": "HOST",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [
+              {
+                "key": "avg(load5s)",
+                "name": "avg(load5s)",
+                "alias": "{{tags}}"
+              }
+            ],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "pageSize": 0,
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "queryMode": "toOneColumn",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "showColumns": [],
+            "valMappings": [],
+            "aliasVersion": 2,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "disableFuncList": true,
+            "currentChartType": "table",
+            "showFieldMapping": false,
+            "valColorMappings": [],
+            "mainMeasurementSort": "top",
+            "mainMeasurementLimit": 20,
+            "openThousandsSeparator": false,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "表格图"
+        },
+        "name": "时序表格图",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "type": "table",
+        "queries": [
+          {
+            "name": "",
+            "type": "table",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "levelArr": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showLabel": true,
+            "showTitle": true,
+            "titleDesc": "",
+            "colorLevel": 3,
+            "globalUnit": [],
+            "isSampling": true,
+            "rangeColor": "",
+            "showLegend": false,
+            "showPercent": false,
+            "timeInterval": "auto",
+            "rangeColorKey": "light-blue",
+            "isTimeInterval": false,
+            "showLabelValue": true,
+            "changeWorkspace": false,
+            "showFieldMapping": false,
+            "mainMeasurementSort": "top",
+            "mainMeasurementLimit": 20,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": ""
+        },
+        "group": {
+          "name": "矩形树图"
+        },
+        "name": "矩形树图",
+        "pos": {
+          "h": 17,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "treemap",
+        "queries": [
+          {
+            "name": "",
+            "type": "treemap",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "funnel",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "漏斗图"
+        },
+        "name": "漏斗图",
+        "pos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "funnel",
+        "queries": [
+          {
+            "name": "",
+            "type": "funnel",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "type": "funnel",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`usage_idle`))",
+              "code": "B",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "usage_idle",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "levelArr": [
+              {
+                "max": 20,
+                "min": 0,
+                "color": "#E5F7FF",
+                "isAuto": true
+              },
+              {
+                "max": 40,
+                "min": 20,
+                "color": "#B9E8FE",
+                "isAuto": true
+              },
+              {
+                "max": 60,
+                "min": 40,
+                "color": "#91D4FF",
+                "isAuto": true
+              },
+              {
+                "max": 80,
+                "min": 60,
+                "color": "#68C0FF",
+                "isAuto": true
+              },
+              {
+                "max": 100,
+                "min": 80,
+                "color": "#3FA9FF",
+                "isAuto": true
+              }
+            ],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "colorLevel": 5,
+            "globalUnit": [],
+            "isSampling": true,
+            "isVariable": false,
+            "showLegend": "none",
+            "provinceKey": "",
+            "showTopList": true,
+            "timeInterval": "auto",
+            "variableCode": "",
+            "rangeColorKey": "light-blue",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "chinamap",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "地图"
+        },
+        "name": "中国地图",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "type": "chinamap",
+        "queries": [
+          {
+            "name": "",
+            "type": "chinamap",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`))",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "levelArr": [
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#E5F7FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#B9E8FE",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#91D4FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#68C0FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#3FA9FF",
+                "isAuto": true
+              }
+            ],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "colorLevel": 5,
+            "globalUnit": [],
+            "isSampling": true,
+            "isVariable": false,
+            "showLegend": "none",
+            "provinceKey": "",
+            "showTopList": false,
+            "timeInterval": "auto",
+            "variableCode": "",
+            "rangeColorKey": "light-blue",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "worldmap",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "地图"
+        },
+        "name": "世界地图",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "type": "worldmap",
+        "queries": [
+          {
+            "name": "",
+            "type": "worldmap",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `region`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "region"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "showLegend": "bottom",
+            "gradualColor": {
+              "type": "auto",
+              "levels": [],
+              "maxVal": null,
+              "minVal": null,
+              "colorKey": "interpolateYlOrBr",
+              "levelCount": 60
+            },
+            "timeInterval": "auto",
+            "maxPointCount": null,
+            "isTimeInterval": true,
+            "changeWorkspace": false,
+            "currentChartType": "heatmap",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "热力图"
+        },
+        "name": "热力图",
+        "pos": {
+          "h": 16,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "heatmap",
+        "queries": [
+          {
+            "name": "",
+            "type": "heatmap",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(fill(avg(`load5s`), 0)) BY `host`",
+              "code": "A",
+              "fill": "number",
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "fillNum": 0,
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "color": {},
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "showLegend": "bottom",
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "topology",
+            "showFieldMapping": false
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "拓扑图"
+        },
+        "name": "拓扑图",
+        "pos": {
+          "h": 18,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "topology",
+        "queries": [
+          {
+            "name": "",
+            "type": "topology",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "fill": "avg_per_second",
+              "filters": [],
+              "service": "anypath",
+              "resource": "",
+              "chartType": "serviceMap"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "sankey",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "桑基图"
+        },
+        "name": "桑基图",
+        "pos": {
+          "h": 17,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "sankey",
+        "queries": [
+          {
+            "name": "",
+            "type": "sankey",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `cpu`, `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "cpu",
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "codeLabelI18NKey": "query.sankey_data"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "levelArr": [
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#E5F7FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#B9E8FE",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#91D4FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#68C0FF",
+                "isAuto": true
+              },
+              {
+                "max": -1,
+                "min": -1,
+                "color": "#3FA9FF",
+                "isAuto": true
+              }
+            ],
+            "unitType": "global",
+            "fixedTime": "",
+            "precision": "2",
+            "showTitle": true,
+            "titleDesc": "",
+            "colorLevel": 3,
+            "globalUnit": [],
+            "isSampling": true,
+            "rangeColor": "",
+            "showLegend": "bottom",
+            "timeInterval": "auto",
+            "rangeColorKey": "light-blue",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "hexgon",
+            "showFieldMapping": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "A"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "蜂窝图"
+        },
+        "name": "蜂窝图",
+        "pos": {
+          "h": 20,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "hexgon",
+        "queries": [
+          {
+            "name": "",
+            "type": "hexgon",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "M::`cpu`:(avg(`load5s`)) BY `host`",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "",
+              "field": "load5s",
+              "filters": [],
+              "groupBy": [
+                "host"
+              ],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "float",
+              "namespace": "metric",
+              "dataSource": "cpu",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "index": "rp70,whytest",
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "inColumns": [
+              {
+                "field": "time",
+                "headerName": "时间"
+              }
+            ],
+            "showTitle": true,
+            "titleDesc": "",
+            "addColumns": [
+              {
+                "field": "message",
+                "headerName": "内容"
+              },
+              {
+                "hide": true,
+                "field": "status"
+              },
+              {
+                "hide": true,
+                "field": "__docid"
+              }
+            ],
+            "globalUnit": [],
+            "isSampling": true,
+            "valMappings": [],
+            "timeInterval": "",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "log",
+            "showFieldMapping": false,
+            "valColorMappings": []
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "流图"
+        },
+        "name": "新建图表",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "type": "log",
+        "queries": [
+          {
+            "name": "",
+            "type": "log",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "",
+              "code": "A",
+              "fill": "",
+              "type": "simple",
+              "alias": "内容",
+              "field": null,
+              "fields": [
+                {
+                  "alias": "内容",
+                  "field": "message"
+                },
+                {
+                  "hide": true,
+                  "field": "status"
+                },
+                {
+                  "hide": true,
+                  "field": "__docid"
+                }
+              ],
+              "search": "",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "avg",
+              "fieldType": "text",
+              "highlight": true,
+              "namespace": "logging",
+              "dataSource": "",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "rp70,whytest",
+              "additionalFields": null,
+              "disableMultipleField": false
+            },
+            "datasource": "dataflux",
+            "noTimeRange": false
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "index": "default",
+            "units": [
+              {
+                "key": "name",
+                "name": "name",
+                "unit": "",
+                "units": [
+                  "custom",
+                  ""
+                ]
+              }
+            ],
+            "colors": [],
+            "levels": [],
+            "unitType": "custom",
+            "fixedTime": "",
+            "inColumns": [],
+            "showTitle": true,
+            "titleDesc": "",
+            "addColumns": [
+              {
+                "field": "name",
+                "headerName": "名称11"
+              },
+              {
+                "field": "class",
+                "headerName": "类别"
+              },
+              {
+                "hide": true,
+                "field": "class"
+              },
+              {
+                "hide": true,
+                "field": "__docid"
+              },
+              {
+                "field": "host"
+              },
+              {
+                "field": "os"
+              }
+            ],
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "object",
+            "showFieldMapping": false
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "流图"
+        },
+        "name": "对象列表图",
+        "pos": {
+          "h": 18,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "type": "object",
+        "queries": [
+          {
+            "name": "",
+            "type": "object",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "O::`HOST`:(`name`, `class`, `__docid`, `host`, `os`) { `name` = re('.*ddddd.*') }",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "名称",
+              "field": null,
+              "fields": [
+                {
+                  "alias": "名称11",
+                  "field": "name",
+                  "isEditAlias": false
+                },
+                {
+                  "alias": "类别",
+                  "field": "class"
+                },
+                {
+                  "hide": true,
+                  "field": "class"
+                },
+                {
+                  "hide": true,
+                  "field": "__docid"
+                },
+                {
+                  "field": "host"
+                },
+                {
+                  "field": "os"
+                }
+              ],
+              "search": "ddddd",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "count",
+              "fieldType": "keyword",
+              "highlight": false,
+              "namespace": "object",
+              "dataSource": "HOST",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "additionalFields": null,
+              "disableMultipleField": false
+            },
+            "datasource": "dataflux",
+            "noTimeRange": true
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "index": "default",
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "pageSize": 50,
+            "showPart": "all",
+            "unitType": "global",
+            "fixedTime": "",
+            "inColumns": [
+              {
+                "field": "time",
+                "headerName": "时间"
+              }
+            ],
+            "showTitle": true,
+            "titleDesc": "",
+            "addColumns": [
+              {
+                "field": "df_status",
+                "headerName": "状态"
+              },
+              {
+                "field": "df_title",
+                "headerName": "事件"
+              }
+            ],
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "",
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "currentChartType": "alarm",
+            "showFieldMapping": false
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": "流图"
+        },
+        "name": "告警统计图",
+        "pos": {
+          "h": 20,
+          "w": 24,
+          "x": 0,
+          "y": 18
+        },
+        "type": "alarm",
+        "queries": [
+          {
+            "name": "",
+            "type": "alarm",
+            "unit": "",
+            "color": "",
+            "qtype": "dql",
+            "query": {
+              "q": "E::`monitor`:(`df_status` AS `状态`, `df_title` AS `事件`)",
+              "code": "A",
+              "fill": null,
+              "type": "simple",
+              "alias": "事件",
+              "field": null,
+              "fields": [
+                {
+                  "alias": "状态",
+                  "field": "df_status"
+                },
+                {
+                  "alias": "事件",
+                  "field": "df_title"
+                }
+              ],
+              "search": "sss",
+              "filters": [],
+              "groupBy": [],
+              "funcList": [],
+              "fieldFunc": "",
+              "fieldType": "float",
+              "namespace": "event",
+              "dataSource": "monitor",
+              "queryFuncs": [],
+              "groupByTime": "",
+              "indexFilter": "",
+              "disableMultipleField": false
+            },
+            "datasource": "dataflux",
+            "noTimeRange": false
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "showFieldMapping": false
+          }
+        },
+        "group": {
+          "name": "文本，图片，iframe"
+        },
+        "name": "文本",
+        "pos": {
+          "h": 14,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "type": "text",
+        "queries": [
+          {
+            "name": "",
+            "query": {
+              "content": "# 文本\n## test"
+            }
+          }
+        ]
+      },
+      {
+        "extend": {
+          "links": [],
+          "settings": {
+            "url": "https://www.lodashjs.com/img/lodash.png",
+            "type": "fill",
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "timeInterval": "auto",
+            "isTimeInterval": false,
+            "backgroundStyle": {
+              "background-size": "cover"
+            },
+            "changeWorkspace": false,
+            "showFieldMapping": false
+          },
+          "isRefresh": true
+        },
+        "group": {
+          "name": "文本，图片，iframe"
+        },
+        "name": "图片",
+        "pos": {
+          "h": 13,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "type": "picture",
+        "queries": []
+      },
+      {
+        "extend": {
+          "links": [],
+          "settings": {
+            "url": "https://www.baidu.com",
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "unitType": "global",
+            "fixedTime": "",
+            "showTitle": true,
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "isTimeInterval": false,
+            "changeWorkspace": false,
+            "showFieldMapping": false
+          },
+          "isRefresh": false
+        },
+        "group": {
+          "name": "文本，图片，iframe"
+        },
+        "name": "新建图表",
+        "pos": {
+          "h": 14,
+          "w": 24,
+          "x": 0,
+          "y": 27
+        },
+        "type": "iframe",
+        "queries": []
+      }
+    ],
+    "groups": [
+      {
+        "name": "时序图",
+        "extend": {
+          "bgColor": "#8CA4BE"
+        }
+      },
+      {
+        "name": "概览图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "饼图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "柱状图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "直方图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "排行榜",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "仪表板",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "散点图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "气泡图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "表格图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "矩形树图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "地图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "漏斗图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "热力图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "拓扑图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "桑基图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "蜂窝图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "流图",
+        "extend": {
+          "bgColor": ""
+        }
+      },
+      {
+        "name": "文本，图片，iframe",
+        "extend": {
+          "bgColor": ""
+        }
+      }
+    ],
+    "type": "template"
+  }
+}

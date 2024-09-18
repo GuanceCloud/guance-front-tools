@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es5",
+    "types": [],
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "outDir": "lib",
+    "declaration": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./lib/src/*.ts"],
+  "exclude": []
+}
