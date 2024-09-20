@@ -1,5 +1,4 @@
 {
-    "private": true,
     "name": "@cloudcare/guance-front-tools",
     "config": {
         "path:generated": "./lib/generated"
