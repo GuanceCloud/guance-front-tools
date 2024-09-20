@@ -4,7 +4,7 @@
         "path:generated": "./lib/generated"
     },
     "bin": {
-        "grafanaCovertToGuance": "./cli.js"
+        "grafanaCovertToGuance": "cli.js"
     },
     "description": "观测云前端工具",
     "type": "module",
@@ -37,5 +37,6 @@
     "license": "ISC",
     "dependencies": {
         "yargs": "^17.7.2"
-    }
+    },
+    "version": ""
 }
