@@ -53,6 +53,21 @@
                     "const": "template"
                 }
             }
+        },
+        "dashboardExtend": {
+            "description": "仪表板额外配置信息",
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+                "groupUnfoldStatus": {
+                    "type": "object",
+                    "description": "分组是否收起打开配置信息,图表名称为 key， value 为 boolean。 false 为关闭，true 为打开",
+                    "additionalProperties": {
+                        "type": "boolean",
+                        "description": "图表名称"
+                    }
+                }
+            }
         }
     }
 }

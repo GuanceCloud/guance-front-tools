@@ -1,7 +1,7 @@
 {
-    "name": "rum-events-schema",
+    "name": "guance-format-schema",
     "version": "1.0.0",
-    "description": "JSON schema of guance RUM events",
+    "description": "JSON schema of guance  events",
     "private": true,
     "main": "cjs/src/index.js",
     "types": "cjs/src/index.d.ts",
@@ -13,5 +13,11 @@
         "session-replay-browser",
         "session-replay-mobile",
         "dashboar-charts"
-    ]
+    ],
+    "devDependencies": {
+        "@types/node": "^12.20.55"
+    },
+    "engines": {
+        "node": ">=12.7.0"
+    }
 }

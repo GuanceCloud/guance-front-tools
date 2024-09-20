@@ -9,6 +9,5 @@
     "declaration": true,
     "resolveJsonModule": true
   },
-  "include": ["./lib/src/*.ts"],
-  "exclude": []
+  "include": ["./lib/src/*.ts", "!./lib/script/*.ts"]
 }
