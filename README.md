@@ -23,9 +23,3 @@ $ grafanaCovertToGuance
 # run task
 $ grafanaCovertToGuance -d examples/grafana.json -o examples/guance.json
 ```
-
-#### 执行方式
-
-```bash
-   node grafanaCovertToGuance
-```
