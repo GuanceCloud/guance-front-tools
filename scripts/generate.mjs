@@ -4,7 +4,6 @@ import { execSync } from 'child_process'
 import prettier from 'prettier'
 import { printLog, logAndExit } from './utils.mjs'
 import { createRequire } from 'module'
-import { jsonschema2md } from '@adobe/jsonschema2md'
 const require = createRequire(import.meta.url)
 const pkg = require('../package.json')
 

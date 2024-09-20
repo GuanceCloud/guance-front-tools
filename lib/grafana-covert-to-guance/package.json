@@ -1,0 +1,6 @@
+{
+    "private": true,
+    "main": "../scripts/grafana-covert-to-guance.js",
+    "module": "../scripts/grafana-covert-to-guance.js",
+    "types": "../scripts/grafana-covert-to-guance.d.ts"
+}

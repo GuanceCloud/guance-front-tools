@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "types": ["node"],
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "target": "ES6",
+    "outDir": "lib",
+    "declaration": false,
+    "resolveJsonModule": true,
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "include": ["./lib/scripts/*.ts"],
+  "exclude": []
+}

@@ -3,6 +3,7 @@
   "dashboardType": "CUSTOM",
   "dashboardExtend": {
     "groupUnfoldStatus": {
+      "时序图": false,
       "表格图": true
     }
   },

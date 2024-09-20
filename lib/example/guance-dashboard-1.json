@@ -1,0 +1,672 @@
+{
+  "title": "SHOWCASE: Loki NGINX Service Mesh - JSON version",
+  "dashboardType": "CUSTOM",
+  "dashboardExtend": {
+    "groupUnfoldStatus": {
+      "KPI's": true,
+      "WELCOME TO GRAFANA PLAY!": true,
+      "Acquisition and Behaviour": false,
+      "Request statistics over time": true
+    }
+  },
+  "dashboardMapping": [],
+  "dashboardOwnerType": "node",
+  "iconSet": {},
+  "dashboardBindSet": [],
+  "thumbnail": "",
+  "tagInfo": [],
+  "summary": "",
+  "main": {
+    "vars": [
+      {
+        "name": "Datasource",
+        "seq": 0,
+        "datasource": "dataflux",
+        "code": "datasource",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "value": "loki",
+          "defaultVal": {
+            "label": "Explore Logs",
+            "value": "ddhr3fttaw8aod"
+          }
+        },
+        "valueSort": "desc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": false
+      },
+      {
+        "name": "Label Name",
+        "seq": 1,
+        "datasource": "dataflux",
+        "code": "label_name",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "value": "label_names()",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "desc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": false
+      },
+      {
+        "name": "Label Value",
+        "seq": 2,
+        "datasource": "dataflux",
+        "code": "label_value",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "value": "label_values(#{label_name})",
+          "defaultVal": {
+            "label": "all values",
+            "value": "__all__"
+          }
+        },
+        "valueSort": "desc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "Job",
+        "seq": 3,
+        "datasource": "dataflux",
+        "code": "job",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "value": "label_values({#{label_name}=~\"#{label_value}\"}, job)",
+          "defaultVal": {
+            "label": "all values",
+            "value": "__all__"
+          }
+        },
+        "valueSort": "desc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "Instance",
+        "seq": 4,
+        "datasource": "dataflux",
+        "code": "instance",
+        "type": "PROMQL_QUERY",
+        "definition": {
+          "value": "label_values({#{label_name}=~\"#{label_value}\"}, instance)",
+          "defaultVal": {
+            "label": "all values",
+            "value": "__all__"
+          }
+        },
+        "valueSort": "desc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      },
+      {
+        "name": "test1",
+        "seq": 5,
+        "datasource": "custom",
+        "code": "test1",
+        "type": "CUSTOM_LIST",
+        "definition": {
+          "tag": "",
+          "field": "",
+          "value": "1,2,3",
+          "metric": "",
+          "object": "",
+          "defaultVal": {
+            "label": "",
+            "value": ""
+          }
+        },
+        "valueSort": "asc",
+        "hide": 0,
+        "isHiddenAsterisk": 0,
+        "multiple": true,
+        "includeStar": true
+      }
+    ],
+    "charts": [
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "WELCOME TO GRAFANA PLAY!"
+        },
+        "name": "",
+        "pos": {
+          "h": 15.3,
+          "w": 6,
+          "x": 0,
+          "y": 2
+        },
+        "type": "text",
+        "queries": [
+          {
+            "query": {
+              "content": "![foo](https://grafana.com/about/events/grafanacon/assets/2023/graphic-golden-grot2.svg)\n"
+            }
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "WELCOME TO GRAFANA PLAY!"
+        },
+        "name": "",
+        "pos": {
+          "h": 5.8,
+          "w": 9,
+          "x": 0,
+          "y": 17.2
+        },
+        "type": "text",
+        "queries": [
+          {
+            "query": {
+              "content": "# THE DASHBOARD SHOWCASE FOR JULY, 2023:\n\n## The [Loki NGINX Service Mesh](https://play.grafana.org/d/T512JVH7z/loki-nginx-service-mesh-json-version?orgId=1), by [Ward Bekker](https://twitter.com/i/flow/login?redirect_after_login=%2Fwardbekker). 👇"
+            }
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "Total requests  ",
+        "pos": {
+          "h": 7.7,
+          "w": 5,
+          "x": 0,
+          "y": 2
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "sum by(host) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"}[#{__interval}]))  ",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "Requests per status code",
+        "pos": {
+          "h": 15.3,
+          "w": 7,
+          "x": 5,
+          "y": 2
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "sum by (status) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  __error__=\"\" [#{__interval}]))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "NGINX logs in bytes",
+        "pos": {
+          "h": 7.7,
+          "w": 3,
+          "x": 12,
+          "y": 2
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "bytes_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"}[#{__interval}])",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "% of 5xx requests ",
+        "pos": {
+          "h": 7.7,
+          "w": 3,
+          "x": 15,
+          "y": 2
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "sum(count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | status >= 500 |__error__=\"\"[#{__interval}])) / (sum(count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | __error__=\"\"[#{__interval}]))/ 100)",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "",
+        "pos": {
+          "h": 7.7,
+          "w": 6,
+          "x": 18,
+          "y": 2
+        },
+        "type": "text",
+        "queries": [
+          {
+            "query": {
+              "content": "📊 Dashboard created by Ward Bekker (hope you like it!)\n\n🐦 Follow me on [Twitter](https://twitter.com/wardbekker) & [LinkedIn](https://www.linkedin.com/in/wardbekker/) for  Grafana Loki updates \n\n🎥 Check out my [Grafana Loki video's](https://www.youtube.com/playlist?list=PLDGkOdUX1UjqEzcxQrbROMy8DN7MZv_h4) on Youtube"
+            }
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "Realtime visitors ",
+        "pos": {
+          "h": 7.7,
+          "w": 5,
+          "x": 0,
+          "y": 9.6
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "count(sum by (remote_addr) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  __error__=\"\" [#{__interval}])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "# NGINX log lines",
+        "pos": {
+          "h": 7.7,
+          "w": 3,
+          "x": 12,
+          "y": 9.6
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"}[#{__interval}])",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "Total Bytes Sent",
+        "pos": {
+          "h": 7.7,
+          "w": 3,
+          "x": 15,
+          "y": 9.6
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "sum by (host) (sum_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | unwrap body_bytes_sent |  __error__=\"\" [#{__interval}]))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "% of requests by Googlebot",
+        "pos": {
+          "h": 7.7,
+          "w": 6,
+          "x": 18,
+          "y": 9.6
+        },
+        "type": "singlestat",
+        "queries": [
+          {
+            "type": "singlestat",
+            "qtype": "promql",
+            "query": {
+              "q": "sum(count_over_time(({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} |= \"Googlebot\")[#{__interval}])) / (sum(count_over_time(({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} != \"Googlebot\")[#{__interval}])) / 100)",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "KPI's"
+        },
+        "name": "Top Countries",
+        "pos": {
+          "h": 21,
+          "w": 3,
+          "x": 12,
+          "y": 17.2
+        },
+        "type": "table",
+        "queries": [
+          {
+            "type": "table",
+            "qtype": "promql",
+            "query": {
+              "q": "topk(10, sum by (geoip_country_code) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | geoip_country_code != \"\" and  __error__=\"\" [#{__interval}])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Request statistics over time"
+        },
+        "name": "95th percentile of Request Time",
+        "pos": {
+          "h": 17.2,
+          "w": 8,
+          "x": 0,
+          "y": 2
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "type": "sequence",
+            "qtype": "promql",
+            "query": {
+              "q": "quantile_over_time(0.95,{#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | unwrap request_time |  __error__=\"\"  [#{__interval}]) by (host)",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "type": "sequence",
+            "qtype": "promql",
+            "query": {
+              "q": "max by (host) (max_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | unwrap request_time |  __error__=\"\"  [#{__interval}]))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Request statistics over time"
+        },
+        "name": "HTTP status codes over time",
+        "pos": {
+          "h": 17.2,
+          "w": 8,
+          "x": 8,
+          "y": 2
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "type": "sequence",
+            "qtype": "promql",
+            "query": {
+              "q": "sum by (status) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  __error__=\"\" [#{__interval}]))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Request statistics over time"
+        },
+        "name": "Bytes Sent",
+        "pos": {
+          "h": 17.2,
+          "w": 8,
+          "x": 16,
+          "y": 2
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "type": "sequence",
+            "qtype": "promql",
+            "query": {
+              "q": "sum by (host) (sum_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json | status=200 | unwrap body_bytes_sent |  __error__=\"\" [#{__interval}]))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Acquisition and Behaviour"
+        },
+        "name": "Top 10 HTTP Referers",
+        "pos": {
+          "h": 11.5,
+          "w": 9,
+          "x": 0,
+          "y": 70.4
+        },
+        "type": "table",
+        "queries": [
+          {
+            "type": "table",
+            "qtype": "promql",
+            "query": {
+              "q": "topk(10, sum by (http_referer) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  http_referer != \"\" and http_referer !~ \".*?#{host}.*?\" and http_referer !~ \".*?\\\\*\\\\*\\\\*.*?\" | __error__=\"\" [15m])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Acquisition and Behaviour"
+        },
+        "name": "Top 10 User Agents",
+        "pos": {
+          "h": 11.5,
+          "w": 15,
+          "x": 9,
+          "y": 70.4
+        },
+        "type": "table",
+        "queries": [
+          {
+            "type": "table",
+            "qtype": "promql",
+            "query": {
+              "q": "topk(10, sum by (http_user_agent) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  __error__=\"\" [15m])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Acquisition and Behaviour"
+        },
+        "name": "Top 10 visitor IPs",
+        "pos": {
+          "h": 15.3,
+          "w": 9,
+          "x": 0,
+          "y": 81.8
+        },
+        "type": "table",
+        "queries": [
+          {
+            "type": "table",
+            "qtype": "promql",
+            "query": {
+              "q": "topk(10, sum by (remote_addr, geoip_country_code) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} | json |  __error__=\"\" [15m])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      },
+      {
+        "extend": {
+          "settings": {}
+        },
+        "group": {
+          "name": "Acquisition and Behaviour"
+        },
+        "name": "Top 10 Requested Pages",
+        "pos": {
+          "h": 15.3,
+          "w": 15,
+          "x": 9,
+          "y": 81.8
+        },
+        "type": "table",
+        "queries": [
+          {
+            "type": "table",
+            "qtype": "promql",
+            "query": {
+              "q": "topk(10, sum by (request_uri) (count_over_time({#{label_name}=~\"#{label_value}\", job=~\"#{job}\", instance=~\"#{instance}\"} !~ `\\.ico|\\.svg|\\.css|\\.png|\\.txt|\\.js|\\.xml` | json | status = 200 and request_uri != \"/\" | __error__=\"\" [15m])))",
+              "type": "promql"
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      }
+    ],
+    "groups": [
+      {
+        "name": "WELCOME TO GRAFANA PLAY!",
+        "extend": {}
+      },
+      {
+        "name": "KPI's",
+        "extend": {}
+      },
+      {
+        "name": "Request statistics over time",
+        "extend": {}
+      },
+      {
+        "name": "Acquisition and Behaviour",
+        "extend": {}
+      }
+    ],
+    "type": "template"
+  }
+}

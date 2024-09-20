@@ -2067,8 +2067,8 @@
             },
             {
                 "current": {
-                    "text": "__stream_shard__",
-                    "value": "__stream_shard__"
+                    "text": "",
+                    "value": ""
                 },
                 "datasource": {
                     "type": "loki",
@@ -2109,8 +2109,12 @@
             {
                 "allValue": ".*",
                 "current": {
-                    "text": "All",
-                    "value": "$__all"
+                    "text": [
+                        "All"
+                    ],
+                    "value": [
+                        "$__all"
+                    ]
                 },
                 "datasource": {
                     "type": "loki",
@@ -2130,8 +2134,12 @@
             {
                 "allValue": ".*",
                 "current": {
-                    "text": "All",
-                    "value": "$__all"
+                    "text": [
+                        "All"
+                    ],
+                    "value": [
+                        "$__all"
+                    ]
                 },
                 "datasource": {
                     "type": "loki",
@@ -2147,6 +2155,28 @@
                 "refresh": 2,
                 "regex": "",
                 "type": "query"
+            },
+            {
+                "current": {
+                    "text": [
+                        "key:value"
+                    ],
+                    "value": [
+                        "key:value"
+                    ]
+                },
+                "label": "query1",
+                "multi": true,
+                "name": "query0",
+                "options": [
+                    {
+                        "selected": true,
+                        "text": "key:value",
+                        "value": "key:value"
+                    }
+                ],
+                "query": "key:value",
+                "type": "custom"
             }
         ]
     },

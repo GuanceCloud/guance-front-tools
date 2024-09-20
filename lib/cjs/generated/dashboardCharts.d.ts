@@ -4,82 +4,7 @@
 /**
  * 图表视图变量列表结构
  */
-export type ChartVarsSettings = {
-    definition?: {
-        /**
-         * 定义 type 为 metrc 类型对应的指标 tag
-         */
-        tag?: string;
-        /**
-         * 定义 type 为 metrc,object,custom_object, logging, tracing,rum,securit 类型对应的 field
-         */
-        field?: string;
-        /**
-         * 定义 type 为 dql,promql,custom_object类型对应的 dql、promql,或者以‘,’号分割的自定义字符串数据
-         */
-        value?: string;
-        /**
-         * 1.type 为 metric 对应指标集 2. type 为 logging,rum 对应 source。
-         */
-        metric?: string;
-        /**
-         * type 为 object, custom_object 对应对象 source
-         */
-        object?: string;
-        /**
-         * 视图变量默认填充值
-         */
-        defaultVal?: {
-            /**
-             * 默认填充值 label，如果没有则和 value 保持一致
-             */
-            label?: string;
-            /**
-             * 默认填充值 value
-             */
-            value?: string;
-            [k: string]: unknown;
-        };
-        [k: string]: unknown;
-    };
-    /**
-     * 视图变量查询类型，对应关系分别为 QUERY:【DQL】,PROMQL_QUERY:【PROMQL】,TAG:【指标】,FIELD:【基础对象】,FIELD:【自定义对象】,LOGGING:【日志】,TRACING:【应用性能】,RUM:【用户访问】,SECURITY:【安全巡检】,CUSTOM_LIST:【自定义】
-     */
-    type?: 'QUERY' | 'PROMQL_QUERY' | 'FIELD' | 'TAG' | 'LOGGING' | 'TRACING' | 'RUM' | 'SECURITY' | 'CUSTOM_LIST';
-    /**
-     * 需要被替换的变量名
-     */
-    code?: string;
-    /**
-     * 对应关系分别为 dataflux:【DQL】,dataflux:【PROMQL】,ftinfluxdb:【指标】,object:【基础对象】,custom_object:【自定义对象】,dataflux:【日志】,dataflux:【应用性能】,dataflux:【用户访问】,dataflux:【安全巡检】,custom:【自定义】
-     */
-    datasource?: 'dataflux' | 'ftinfluxdb' | 'custom' | 'object' | 'custom_object';
-    /**
-     * 视图变量显示名称
-     */
-    name?: string;
-    /**
-     * 当前项视图变量在列表中的顺序
-     */
-    seq?: number;
-    /**
-     * 是否隐藏该项视图变量
-     */
-    hide?: 0 | 1;
-    /**
-     * 设置视图变量是否能多选
-     */
-    multiple?: boolean;
-    /**
-     * 设置视图变量列出值是否包含 *
-     */
-    includeStar?: boolean;
-    /**
-     * 列出值排序
-     */
-    valueSort?: 'asc' | 'desc';
-    [k: string]: unknown;
-}[];
+export type ChartVarsSettings = ChartVarsItem[];
 /**
  * 图表设置配置完整结构。
  */
@@ -1046,6 +971,100 @@ export interface DashboardData {
         type?: 'template';
         [k: string]: unknown;
     };
+    /**
+     * 仪表板额外配置信息
+     */
+    dashboardExtend?: {
+        /**
+         * 分组是否收起打开配置信息,图表名称为 key， value 为 boolean。 false 为关闭，true 为打开
+         */
+        groupUnfoldStatus?: {
+            /**
+             * 图表名称
+             */
+            [k: string]: boolean;
+        };
+        [k: string]: unknown;
+    };
+    [k: string]: unknown;
+}
+/**
+ * 图表视图变量完整结构
+ */
+export interface ChartVarsItem {
+    definition?: {
+        /**
+         * 定义 type 为 metrc 类型对应的指标 tag
+         */
+        tag?: string;
+        /**
+         * 定义 type 为 metrc,object,custom_object, logging, tracing,rum,securit 类型对应的 field
+         */
+        field?: string;
+        /**
+         * 定义 type 为 dql,promql,custom_object类型对应的 dql、promql,或者以‘,’号分割的自定义字符串数据
+         */
+        value?: string;
+        /**
+         * 1.type 为 metric 对应指标集 2. type 为 logging,rum 对应 source。
+         */
+        metric?: string;
+        /**
+         * type 为 object, custom_object 对应对象 source
+         */
+        object?: string;
+        /**
+         * 视图变量默认填充值
+         */
+        defaultVal?: {
+            /**
+             * 默认填充值 label，如果没有则和 value 保持一致
+             */
+            label?: string;
+            /**
+             * 默认填充值 value
+             */
+            value?: string;
+            [k: string]: unknown;
+        };
+        [k: string]: unknown;
+    };
+    /**
+     * 视图变量查询类型，对应关系分别为 QUERY:【DQL】,PROMQL_QUERY:【PROMQL】,TAG:【指标】,FIELD:【基础对象】,FIELD:【自定义对象】,LOGGING:【日志】,TRACING:【应用性能】,RUM:【用户访问】,SECURITY:【安全巡检】,CUSTOM_LIST:【自定义】
+     */
+    type?: 'QUERY' | 'PROMQL_QUERY' | 'FIELD' | 'TAG' | 'LOGGING' | 'TRACING' | 'RUM' | 'SECURITY' | 'CUSTOM_LIST';
+    /**
+     * 需要被替换的变量名
+     */
+    code?: string;
+    /**
+     * 对应关系分别为 dataflux:【DQL】,dataflux:【PROMQL】,ftinfluxdb:【指标】,object:【基础对象】,custom_object:【自定义对象】,dataflux:【日志】,dataflux:【应用性能】,dataflux:【用户访问】,dataflux:【安全巡检】,custom:【自定义】
+     */
+    datasource?: 'dataflux' | 'ftinfluxdb' | 'custom' | 'object' | 'custom_object';
+    /**
+     * 视图变量显示名称
+     */
+    name?: string;
+    /**
+     * 当前项视图变量在列表中的顺序
+     */
+    seq?: number;
+    /**
+     * 是否隐藏该项视图变量
+     */
+    hide?: 0 | 1;
+    /**
+     * 设置视图变量是否能多选
+     */
+    multiple?: boolean;
+    /**
+     * 设置视图变量列出值是否包含 *
+     */
+    includeStar?: boolean;
+    /**
+     * 列出值排序
+     */
+    valueSort?: 'asc' | 'desc';
     [k: string]: unknown;
 }
 /**
