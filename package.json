@@ -1,6 +1,7 @@
 {
     "name": "@cloudcare/guance-front-tools",
     "version": "1.0.0",
+    "private": true,
     "config": {
         "path:generated": "./lib/generated"
     },
