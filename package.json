@@ -1,5 +1,6 @@
 {
     "name": "@cloudcare/guance-front-tools",
+    "version": "1.0.0",
     "config": {
         "path:generated": "./lib/generated"
     },
@@ -37,6 +38,5 @@
     "license": "ISC",
     "dependencies": {
         "yargs": "^17.7.2"
-    },
-    "version": ""
+    }
 }
