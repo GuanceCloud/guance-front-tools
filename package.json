@@ -1,15 +1,17 @@
 {
     "private": true,
-    "workspaces": [
-        "lib"
-    ],
+    "name": "@cloudcare/guance-front-tools",
     "config": {
         "path:generated": "./lib/generated"
     },
     "bin": {
         "grafanaCovertToGuance": "./cli.js"
     },
+    "description": "观测云前端工具",
     "type": "module",
+    "main": "lib/cjs/src/index.js",
+    "types": "lib/cjs/src/index.d.ts",
+    "module": "lib/esm/src/index.js",
     "scripts": {
         "build": "npm run clean && npm run generate && npm run build:cjs && npm run build:esm && npm run build:script",
         "build:cjs": "tsc -p tsconfig.cjs.json",
