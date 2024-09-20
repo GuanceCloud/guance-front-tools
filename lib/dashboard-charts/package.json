@@ -1,6 +1,0 @@
-{
-    "private": true,
-    "main": "../cjs/src/dashboard-charts.js",
-    "module": "../esm/src/dashboard-charts.js",
-    "types": "../esm/src/dashboard-charts.d.ts"
-}
