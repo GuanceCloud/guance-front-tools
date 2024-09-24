@@ -75,9 +75,10 @@ const grafanaPanelTypeToGuanceChartMap: { [key: string]: GuanceChartType } = {
   heatmap: 'heatmap',
   treemap: 'treemap',
 }
-
+const GRAFANA_KEYWORKD = ['__interval']
 function replaceVariableStr(grafanaExpr: string): string {
   return grafanaExpr.replace(/\$([\d_\w]+)/g, (match, $0) => {
+    if (GRAFANA_KEYWORKD.includes($0)) return match
     return `#{${$0}}`
   })
 }
