@@ -1,6 +1,6 @@
 {
     "name": "@cloudcare/guance-front-tools",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "publishConfig": {
         "access": "public"
     },
@@ -23,7 +23,8 @@
         "clean": "rm -rf ./lib/generated && rm -rf ./lib/esm && rm -rf ./lib/cjs",
         "generate": "node scripts/generate.mjs",
         "format": "prettier -c .",
-        "validate": "node scripts/validate.mjs"
+        "validate": "node scripts/validate.mjs",
+        "prepare": "npm run build"
     },
     "devDependencies": {
         "ajv": "8.11.0",
