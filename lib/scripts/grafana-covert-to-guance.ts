@@ -174,7 +174,7 @@ function covertPanelToGuanceChart(grafanaPanel: Panel, rowPanel: RowPanel | unde
       settings: settings,
     },
     group: {
-      name: rowPanel ? rowPanel.title : 'default',
+      name: rowPanel ? rowPanel.title : null,
     },
     pos: {
       x: pos.x,
@@ -271,7 +271,7 @@ const covert = (grafanaData: GrafanaDashboardType): GuanceDashboardType => {
     const guanceVariableItem: ChartVarsItem = {
       type: VARIABLE_MAP[type],
       datasource: VARIABLE_DATASOURCE_MAP[type],
-      name: _variable.label,
+      name: _variable.label || _variable.name || '',
       seq: index,
       hide: _variable.hide ? 1 : 0,
       multiple: _variable.multi !== undefined ? _variable.multi : true,
