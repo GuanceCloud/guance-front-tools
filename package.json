@@ -1,6 +1,6 @@
 {
     "name": "@cloudcare/guance-front-tools",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "publishConfig": {
         "access": "public"
     },
