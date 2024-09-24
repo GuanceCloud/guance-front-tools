@@ -25,8 +25,16 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string",
-                    "description": "分组名称"
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "description": "分组名称"
+                        },
+                        {
+                            "type": "null",
+                            "description": "分组名称"
+                        }
+                    ]
                 }
             }
         },

@@ -1076,10 +1076,7 @@ export interface ChartData {
         [k: string]: unknown;
     };
     group?: {
-        /**
-         * 分组名称
-         */
-        name?: string;
+        name?: string | null;
         [k: string]: unknown;
     };
     /**
