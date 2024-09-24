@@ -64,8 +64,10 @@ import type { DashboardData as GrafanaDashboardType, VariableModel, Panel, RowPa
 //   | 'iframe'
 const grafanaPanelTypeToGuanceChartMap: { [key: string]: GuanceChartType } = {
   stat: 'singlestat',
+  singlestat: 'singlestat',
   barchart: 'bar',
   timeseries: 'sequence',
+  graph: 'sequence',
   piechart: 'pie',
   histogram: 'histogram',
   bargauge: 'toplist',
@@ -258,18 +260,26 @@ const covert = (grafanaData: GrafanaDashboardType): GuanceDashboardType => {
         value: values.join(','),
       }
     }
+    let value = _variable.query
+    if (value && typeof value === 'object' && value.query) {
+      value = replaceVariableStr(value.query as string)
+    } else if (value && typeof value === 'string') {
+      value = replaceVariableStr(_variable.query as string)
+    } else {
+      return
+    }
     const guanceVariableItem: ChartVarsItem = {
       type: VARIABLE_MAP[type],
       datasource: VARIABLE_DATASOURCE_MAP[type],
       name: _variable.label,
       seq: index,
       hide: _variable.hide ? 1 : 0,
-      multiple: _variable.multi,
-      includeStar: _variable.includeAll,
+      multiple: _variable.multi !== undefined ? _variable.multi : true,
+      includeStar: _variable.includeAll !== undefined ? _variable.includeAll : true,
       valueSort: 'desc',
       code: _variable.name,
       definition: {
-        value: replaceVariableStr(_variable.query as string),
+        value: value,
         defaultVal: defaultVal,
       },
     }
@@ -368,6 +378,11 @@ export async function run(args) {
   try {
     const grafanaJSONData = JSON.parse(fs.readFileSync(grafanaJsonPath, 'utf-8'))
     const covertResult = covert(grafanaJSONData)
+    // 确保目录存在
+    const dir = path.dirname(outGuanceJsonPath)
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true }) // recursive: true 确保递归创建目录
+    }
     fs.writeFileSync(outGuanceJsonPath, JSON.stringify(covertResult), 'utf-8')
   } catch (err) {
     throw new Error(err)
