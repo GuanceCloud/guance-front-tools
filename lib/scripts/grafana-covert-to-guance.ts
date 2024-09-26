@@ -141,20 +141,21 @@ function covertPanelToGuanceChart(grafanaPanel: Panel, rowPanel: RowPanel | unde
   const queries: GuanceChartQueries = []
   if (targets && targets.length) {
     targets.forEach((_target) => {
-      if (!_target.expr) return
+      const queryStr: string | unknown = _target.expr || _target.query
+      if (!queryStr) return
       const queryItem: GuanceChartQueryItem = {
         datasource: 'dataflux',
         qtype: 'promql',
         type: chartType,
         query: {
-          q: replaceVariableStr(_target.expr as string),
+          q: replaceVariableStr(queryStr as string),
           type: 'promql',
         },
       }
       queries.push(queryItem)
     })
   }
-  const settings: GuanceChartSettings = {}
+  let settings: GuanceChartSettings = {}
   if (options) {
     switch (chartType) {
       case 'text':
@@ -164,6 +165,12 @@ function covertPanelToGuanceChart(grafanaPanel: Panel, rowPanel: RowPanel | unde
           },
         }
         queries.push(queryItem)
+        break
+      case 'toplist':
+        settings = {
+          showTopSize: true,
+          chartType: 'bar',
+        }
         break
       default:
         break
