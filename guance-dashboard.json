@@ -1,1 +1,1530 @@
-{"title":"荷丹路kubernetes 监控大屏 新","dashboardExtend":{"groupUnfoldStatus":{}},"main":{"vars":[],"charts":[{"extend":{"settings":{"showTopSize":true,"chartType":"bar"}},"group":{"name":null},"pos":{"x":0,"y":0.5,"h":9.6,"w":6},"name":"核心组件可用率","queries":[{"datasource":"dataflux","qtype":"promql","type":"toplist","query":{"q":"avg(node:node_cpu_load_rate{instance=~\"hd-l-base-k8sno.+\"})","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"toplist","query":{"q":"avg(node:node_memory_usage_rate{instance=~\"hd-l-base-k8sno.+\"})","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"toplist","query":{"q":"kube_deployment_status_replicas_available{datacenter=\"hd\", deployment=~\"coredns\"} / kube_deployment_spec_replicas{datacenter=\"hd\", deployment=~\"coredns\"} ","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"toplist","query":{"q":"kube_daemonset_status_number_available{datacenter=\"hd\", daemonset=\"calico-node\"} / kube_daemonset_status_desired_number_scheduled{datacenter=\"hd\", daemonset=\"calico-node\"}","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"toplist","query":{"q":"sum(up{job=~\"apiserver|kube-controller-manager|kube-scheduler|etcd-k8s\"}) by (job) / 3","type":"promql"}}],"type":"toplist"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":6,"y":0.5,"h":9.6,"w":3},"name":"Etcd 选举次数","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(changes(etcd_server_leader_changes_seen_total{job=\"etcd-k8s\"}[5m]))","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":9,"y":0.5,"h":9.6,"w":3},"name":"Ingress Nginx 总请求次数","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(irate(nginx_ingress_controller_nginx_process_requests_total{controller_pod=~\"nginx-ingress-controller.+\"}[5m]))","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":12,"y":0.5,"h":9.6,"w":3},"name":"Istio Ingressgateway 总请求次数","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(irate(istio_requests_total[5m]))","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":15,"y":0.5,"h":9.6,"w":4},"name":"k8s组件日志情况","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"((((appname:k8s AND NOT json.level:I) AND NOT json.ip:10.200.8.91) AND NOT json.ip:10.200.8.102) AND NOT json.ip:10.200.8.93) AND NOT 'json.ip':10.200.8.92|timechart span=1m count() by json.level|rename 'count():E' as error  'count():W' as warning","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":19,"y":0.5,"h":9.6,"w":5},"name":"Ingress Nginx 错误日志情况","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"appname:ingress_err AND NOT 'json.level':warn AND NOT preview AND NOT haoportal.huazhu.com AND NOT \"could not parse backends data\"| timechart span=1m count() by json.level |rename 'count():error' as error 'count():warn' as warning 'count():crit' as critial 'count():notice' as notice","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":9.6,"h":9.6,"w":12},"name":"Ingress Nginx Cpu核数","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"avg(irate(container_cpu_usage_seconds_total{container=\"nginx-ingress-controller\"}[5m])) by (pod)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":12,"y":9.6,"h":9.6,"w":6},"name":"Ingress Nginx 集群连接状态","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"sum(nginx_ingress_controller_nginx_process_connections{controller_pod=~\"nginx-ingress-controller-all-.+\"}) by (state)","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"sum(nginx_ingress_controller_nginx_process_connections{controller_pod=~\"nginx-ingress-controller-base-.+\"}) by (state)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":18,"y":9.6,"h":9.6,"w":6},"name":"Ingress Nginx 4xx/5xx 请求","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"sum(increase(nginx_ingress_controller_requests{status=~\"[4-5].+\"}[1m])) by (status) > 0","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":19.1,"h":13.4,"w":8},"name":"k8s节点 load 与 cpu核心数 比率","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node:node_cpu_load_rate{instance=~\".*k8s.*\"}","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":8,"y":19.1,"h":13.4,"w":8},"name":"k8s 节点内存使用率","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node:node_memory_usage_rate{datacenter!=\"jq\",instance=~\".+k8s.+\"}","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":16,"y":19.1,"h":7.7,"w":4},"name":"node节点剩余内存","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(node_memory_MemAvailable_bytes{instance=~\"hd-l-base-k8sno.*\"})\r","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":20,"y":19.1,"h":7.7,"w":4},"name":"node节点剩余cpu（逻辑核）","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"count(node_softnet_dropped_total{instance=~\"hd-l-base-k8sno.*\"}) * avg(sum(rate(node_cpu_seconds_total{mode=\"idle\",instance=~\"hd-l-base-k8sno.*\"}[1m])) by (instance)) /100\r\n","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":16,"y":26.7,"h":5.8,"w":4},"name":"CoreDNS QPS","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(irate(coredns_dns_request_count_total{service=\"kube-dns\"}[5m]))","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":20,"y":26.7,"h":11.5,"w":4},"name":"Zombie Processes","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"sum(node_processes_state{state=\"Z\", instance=~\".+k8s.+\"}) by (instance)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":32.4,"h":13.4,"w":8},"name":"k8s节点 磁盘使用率","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node:node_disk_filesystem_usage_rate{mountpoint=\"/data\"}","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node:node_disk_filesystem_usage_rate{mountpoint!=\"/data\"} > 0.7","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node:node_disk_filesystem_usage_rate{mountpoint=\"/\"}","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":8,"y":32.4,"h":13.4,"w":8},"name":"k8s节点 网络流量","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"0 - irate(node_network_transmit_bytes_total{device=~\"team.*\", instance=~\"hd-l-base-k8sno.+\"}[5m])","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"irate(node_network_receive_bytes_total{device=~\"team.*\", instance=~\"hd-l-base-k8sno.+\"}[5m])","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":16,"y":32.4,"h":5.8,"w":4},"name":"Network Error","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(irate(node_network_receive_errs_total{device=\"team0\"}[5m]) > 0)","type":"promql"}},{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(irate(node_network_transmit_errs_total{device=\"team0\"}[5m]) > 0)","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":16,"y":38.1,"h":7.7,"w":4},"name":"Felix error log","queries":[{"datasource":"dataflux","qtype":"promql","type":"singlestat","query":{"q":"sum(increase(felix_log_errors[5m]))","type":"promql"}}],"type":"singlestat"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":45.7,"h":11.5,"w":8},"name":"cpu 频率情况","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"avg(node_cpu_scaling_frequency_hertz{instance=~\"hd-l-base-k8s.*\"}) by (instance) ","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":8,"y":45.7,"h":11.5,"w":8},"name":"Node TCP State","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node_tcp_connection_states{state!~\"(tx_queued_bytes|rx_queued_bytes|listen)\", instance=~\"hd-l.+\"}","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":16,"y":45.7,"h":11.5,"w":8},"name":"Node Process Pid Usage","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"node_processes_threads{instance=~\".+k8s.+\"} / node_processes_max_processes{instance=~\".+k8s.+\"}","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":57.1,"h":15.3,"w":12},"name":"Ingress Nginx 4xx/5xx 请求","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"sum(increase(nginx_ingress_controller_requests{status=~\"499\"}[1m])) by (service, status) > 0","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":12,"y":57.1,"h":15.3,"w":12},"name":"cpu 温度","queries":[],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":72.3,"h":15.3,"w":12},"name":"调用源 程序cpu","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"avg(irate(container_cpu_usage_seconds_total{container!=\"(POD|istio-proxy)\", namespace=\"sre\", pod=~\"invokesource.+\"}[5m]) ) by (pod)\r\n/\r\nmax( kube_pod_container_resource_limits_cpu_cores{namespace=\"sre\", pod=~\"invokesource.+\"} ) by (pod)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":12,"y":72.3,"h":15.3,"w":12},"name":"调用源 程序内存","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"avg(container_memory_working_set_bytes{ container!=\"POD\",namespace=\"sre\", pod=~\"invokesource.+\"} ) by (pod)\r\n/\r\nmax( kube_pod_container_resource_limits_memory_bytes{namespace=\"sre\", pod=~\"invokesource.+\"} ) by (pod)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":87.5,"h":15.3,"w":12},"name":"Certficate Status","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"count(kube_certificatesigningrequest_condition)","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":12,"y":87.5,"h":15.3,"w":12},"name":"cpu 使用量","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"avg(rate(container_cpu_usage_seconds_total{namespace!~\"(netis|sre)\", container!~\"(POD|istio-proxy|olp-srvr-v1)\",service=\"kubelet\"}[5m]) ) by (container, namespace)\r\n        /\r\navg( kube_pod_container_resource_limits_cpu_cores ) by (container, namespace) * 100 > 50","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":0,"y":102.7,"h":11.5,"w":8},"name":"Node 重传","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"irate(node_netstat_Tcp_RetransSegs{instance=~\"hd-l.+\"}[1m])\r","type":"promql"}}],"type":"sequence"},{"extend":{"settings":{}},"group":{"name":null},"pos":{"x":8,"y":102.7,"h":11.5,"w":8},"name":"apiserver响应时间","queries":[{"datasource":"dataflux","qtype":"promql","type":"sequence","query":{"q":"histogram_quantile(0.95, sum(rate(apiserver_request_duration_seconds_bucket{verb!~\"CONNECT|WATCH\",instance=~\"10.200.24.*\"}[5m])) by (le,instance))","type":"promql"}}],"type":"sequence"}],"groups":[]}}
+{
+    "title": "【集群维度】eks 总览大盘",
+    "dashboardExtend": {
+        "groupUnfoldStatus": {
+            "概览 【$cluster】": true,
+            "CPU": true,
+            "内存": true,
+            "网络": true,
+            "存储": true,
+            "Kubernetes": false
+        }
+    },
+    "main": {
+        "vars": [
+            {
+                "type": "PROMQL_QUERY",
+                "datasource": "dataflux",
+                "name": "cluster",
+                "seq": 1,
+                "hide": 0,
+                "multiple": false,
+                "includeStar": false,
+                "valueSort": "desc",
+                "code": "cluster",
+                "definition": {
+                    "value": "label_values(kube_node_info,cluster)",
+                    "defaultVal": {
+                        "label": "hyde-prod-eks-1",
+                        "value": "hyde-prod-eks-1"
+                    }
+                }
+            },
+            {
+                "type": "CUSTOM_LIST",
+                "datasource": "custom",
+                "name": "resolution",
+                "seq": 2,
+                "hide": 0,
+                "multiple": false,
+                "includeStar": false,
+                "valueSort": "desc",
+                "code": "resolution",
+                "definition": {
+                    "value": "1s, 15s, 30s, 1m, 3m, 5m",
+                    "defaultVal": {
+                        "label": "30s",
+                        "value": "30s"
+                    }
+                }
+            }
+        ],
+        "charts": [
+            {
+                "extend": {
+                    "settings": {
+                        "showTopSize": true,
+                        "chartType": "bar"
+                    }
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 6
+                },
+                "name": "Global CPU  Usage",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "avg(sum by (instance, cpu) (rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", cluster=\"#{cluster}\"}[#{__rate_interval}])))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_requests{resource=\"cpu\", cluster=\"#{cluster}\"}) / sum(machine_cpu_cores{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_limits{resource=\"cpu\", cluster=\"#{cluster}\"}) / sum(machine_cpu_cores{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    }
+                ],
+                "type": "toplist"
+            },
+            {
+                "extend": {
+                    "settings": {
+                        "showTopSize": true,
+                        "chartType": "bar"
+                    }
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 6,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 6
+                },
+                "name": "Global RAM Usage",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"} - node_memory_MemAvailable_bytes{cluster=\"#{cluster}\"}) / sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_requests{resource=\"memory\", cluster=\"#{cluster}\"}) / sum(machine_memory_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "toplist",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_limits{resource=\"memory\", cluster=\"#{cluster}\"}) / sum(machine_memory_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    }
+                ],
+                "type": "toplist"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 12,
+                    "y": 2,
+                    "h": 7.7,
+                    "w": 2
+                },
+                "name": "Nodes",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "count(count by (node) (kube_node_info{cluster=\"#{cluster}\"}))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "singlestat"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 14,
+                    "y": 2,
+                    "h": 22.9,
+                    "w": 10
+                },
+                "name": "Kubernetes Resource Count",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_namespace_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_pod_container_status_running{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_pod_status_phase{phase=\"Running\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_service_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_endpoint_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "E",
+                            "promqlCode": 5
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_ingress_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "F",
+                            "promqlCode": 6
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_deployment_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "G",
+                            "promqlCode": 7
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_statefulset_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "H",
+                            "promqlCode": 8
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_daemonset_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "I",
+                            "promqlCode": 9
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_persistentvolumeclaim_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "J",
+                            "promqlCode": 10
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_hpa_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "K",
+                            "promqlCode": 11
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_configmap_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "L",
+                            "promqlCode": 12
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_secret_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "M",
+                            "promqlCode": 13
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_networkpolicy_labels{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "N",
+                            "promqlCode": 14
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "count(count by (node) (kube_node_info{cluster=\"#{cluster}\"}))",
+                            "type": "promql",
+                            "code": "O",
+                            "promqlCode": 15
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "count(avg(namespace_workload_pod:kube_pod_owner:relabel{cluster=\"#{cluster}\"}) by (workload, cluster)) by (cluster)",
+                            "type": "promql",
+                            "code": "P",
+                            "promqlCode": 16
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 12,
+                    "y": 9.6,
+                    "h": 7.7,
+                    "w": 2
+                },
+                "name": "Running Pods",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(kube_pod_status_phase{phase=\"Running\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "singlestat"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 17.2,
+                    "h": 7.7,
+                    "w": 6
+                },
+                "name": "CPU Usage",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", cluster=\"#{cluster}\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_requests{resource=\"cpu\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_limits{resource=\"cpu\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(machine_cpu_cores{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    }
+                ],
+                "type": "singlestat"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 6,
+                    "y": 17.2,
+                    "h": 7.7,
+                    "w": 6
+                },
+                "name": "RAM Usage",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"} - node_memory_MemAvailable_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_requests{resource=\"memory\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(kube_pod_container_resource_limits{resource=\"memory\", cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "sum(machine_memory_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    }
+                ],
+                "type": "singlestat"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "概览 【$cluster】"
+                },
+                "pos": {
+                    "x": 12,
+                    "y": 17.2,
+                    "h": 7.7,
+                    "w": 2
+                },
+                "name": "Namespaces",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "singlestat",
+                        "query": {
+                            "q": "count(kube_namespace_created{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "singlestat"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "CPU"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 9
+                },
+                "name": "Cluster CPU Utilization",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "avg(sum by (instance, cpu) (rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", cluster=\"#{cluster}\"}[#{__rate_interval}])))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "CPU"
+                },
+                "pos": {
+                    "x": 9,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 15
+                },
+                "name": "CPU Utilization by instance",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "avg(sum by (instance, cpu) (rate(node_cpu_seconds_total{mode!~\"idle|iowait|steal\", cluster=\"#{cluster}\"}[#{__rate_interval}]))) by (instance)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "CPU"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 17.2,
+                    "h": 15.3,
+                    "w": 9
+                },
+                "name": "CPU Utilization by namespace",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(container_cpu_usage_seconds_total{image!=\"\", cluster=\"#{cluster}\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "CPU"
+                },
+                "pos": {
+                    "x": 9,
+                    "y": 17.2,
+                    "h": 15.3,
+                    "w": 15
+                },
+                "name": "CPU",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(namespace_cpu:kube_pod_container_resource_requests:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"#{cluster}\"}) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_requests:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(namespace_cpu:kube_pod_container_resource_limits:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate{cluster=\"#{cluster}\"}) by (namespace) / sum(namespace_cpu:kube_pod_container_resource_limits:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "E",
+                            "promqlCode": 5
+                        }
+                    }
+                ],
+                "type": "table"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "内存"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 9
+                },
+                "name": "Cluster Memory Utilization",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"} - node_memory_MemAvailable_bytes{cluster=\"#{cluster}\"}) / sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "内存"
+                },
+                "pos": {
+                    "x": 9,
+                    "y": 2,
+                    "h": 15.3,
+                    "w": 15
+                },
+                "name": "Memory Utilization by instance",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(node_memory_MemTotal_bytes{cluster=\"#{cluster}\"} - node_memory_MemAvailable_bytes{cluster=\"#{cluster}\"}) by (instance)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "内存"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 17.2,
+                    "h": 15.3,
+                    "w": 9
+                },
+                "name": "Memory Utilization by namespace",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(container_memory_working_set_bytes{image!=\"\", cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "内存"
+                },
+                "pos": {
+                    "x": 9,
+                    "y": 17.2,
+                    "h": 15.3,
+                    "w": 15
+                },
+                "name": "内存",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", container!=\"\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(namespace_memory:kube_pod_container_resource_requests:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", container!=\"\"}) by (namespace) / sum(namespace_memory:kube_pod_container_resource_requests:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(namespace_memory:kube_pod_container_resource_limits:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(container_memory_rss{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", container!=\"\"}) by (namespace) / sum(namespace_memory:kube_pod_container_resource_limits:sum{cluster=\"#{cluster}\"}) by (namespace)",
+                            "type": "promql",
+                            "code": "E",
+                            "promqlCode": 5
+                        }
+                    }
+                ],
+                "type": "table"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 2,
+                    "h": 13.4,
+                    "w": 24
+                },
+                "name": "网络",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_receive_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_transmit_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_receive_packets_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_transmit_packets_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_receive_packets_dropped_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "E",
+                            "promqlCode": 5
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(irate(container_network_transmit_packets_dropped_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "F",
+                            "promqlCode": 6
+                        }
+                    }
+                ],
+                "type": "table"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 15.3,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Network Received by namespace",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(container_network_receive_bytes_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "- sum(rate(container_network_transmit_bytes_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 8,
+                    "y": 15.3,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Rate of Received Packets",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(irate(container_network_receive_packets_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", cluster=\"#{cluster}\", namespace=~\".+\"}[#{__rate_interval}])) by (namespace)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 16,
+                    "y": 15.3,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Network Saturation - Packets dropped",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(node_network_receive_drop_total{cluster=\"#{cluster}\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "- sum(rate(node_network_transmit_drop_total{cluster=\"#{cluster}\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 30.5,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Network Received (loopback only) by instance",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(node_network_receive_bytes_total{device=\"lo\", cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "- sum(rate(node_network_transmit_bytes_total{device=\"lo\", cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 8,
+                    "y": 30.5,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Total Network Received (with all virtual devices) by instance",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(node_network_receive_bytes_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "- sum(rate(node_network_transmit_bytes_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "网络"
+                },
+                "pos": {
+                    "x": 16,
+                    "y": 30.5,
+                    "h": 15.3,
+                    "w": 8
+                },
+                "name": "Network Received (without loopback)  by instance",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(rate(node_network_receive_bytes_total{device!~\"lxc.*|veth.*|lo\", cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "- sum(rate(node_network_transmit_bytes_total{device!~\"lxc.*|veth.*|lo\", cluster=\"#{cluster}\"}[#{__rate_interval}])) by (instance)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "存储"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 2,
+                    "h": 13.4,
+                    "w": 24
+                },
+                "name": "Storage IO",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_reads_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_writes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_reads_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]) + rate(container_fs_writes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "C",
+                            "promqlCode": 3
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_reads_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "D",
+                            "promqlCode": 4
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_writes_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "E",
+                            "promqlCode": 5
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum by(namespace) (rate(container_fs_reads_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]) + rate(container_fs_writes_bytes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]))",
+                            "type": "promql",
+                            "code": "F",
+                            "promqlCode": 6
+                        }
+                    }
+                ],
+                "type": "table"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "存储"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": 15.3,
+                    "h": 17.2,
+                    "w": 7
+                },
+                "name": "Persistent Volumes - Usage in GB",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(kubelet_volume_stats_used_bytes{cluster=\"#{cluster}\"}) by (persistentvolumeclaim)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "table",
+                        "query": {
+                            "q": "sum(kubelet_volume_stats_capacity_bytes{cluster=\"#{cluster}\"}) by (persistentvolumeclaim)",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "table"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "存储"
+                },
+                "pos": {
+                    "x": 7,
+                    "y": 15.3,
+                    "h": 17.2,
+                    "w": 8
+                },
+                "name": "Persistent Volumes - Usage in %",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kubelet_volume_stats_used_bytes{cluster=\"#{cluster}\"}) by (persistentvolumeclaim) / sum(kubelet_volume_stats_capacity_bytes{cluster=\"#{cluster}\"}) by (persistentvolumeclaim)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "存储"
+                },
+                "pos": {
+                    "x": 15,
+                    "y": 15.3,
+                    "h": 17.2,
+                    "w": 9
+                },
+                "name": "IOPS(Reads+Writes)",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "ceil(sum by(namespace) (rate(container_fs_reads_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", container!=\"\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}]) + rate(container_fs_writes_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", container!=\"\", cluster=\"#{cluster}\", namespace!=\"\"}[#{__rate_interval}])))",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "Kubernetes"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": -86.5,
+                    "h": 17.2,
+                    "w": 12
+                },
+                "name": "Kubernetes Pods QoS classes",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_pod_status_qos_class{cluster=\"#{cluster}\"}) by (qos_class)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    },
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_pod_info{cluster=\"#{cluster}\"})",
+                            "type": "promql",
+                            "code": "B",
+                            "promqlCode": 2
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "Kubernetes"
+                },
+                "pos": {
+                    "x": 12,
+                    "y": -86.5,
+                    "h": 17.2,
+                    "w": 12
+                },
+                "name": "Kubernetes Pods Status Reason",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(kube_pod_status_reason{cluster=\"#{cluster}\"}) by (reason)",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "Kubernetes"
+                },
+                "pos": {
+                    "x": 0,
+                    "y": -73,
+                    "h": 17.2,
+                    "w": 12
+                },
+                "name": "OOM Events by namespace",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(increase(container_oom_events_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (namespace) > 0",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            },
+            {
+                "extend": {
+                    "settings": {}
+                },
+                "group": {
+                    "name": "Kubernetes"
+                },
+                "pos": {
+                    "x": 12,
+                    "y": -73,
+                    "h": 17.2,
+                    "w": 12
+                },
+                "name": "Container Restarts by namespace",
+                "queries": [
+                    {
+                        "datasource": "dataflux",
+                        "qtype": "promql",
+                        "type": "sequence",
+                        "query": {
+                            "q": "sum(increase(kube_pod_container_status_restarts_total{cluster=\"#{cluster}\"}[#{__rate_interval}])) by (namespace) > 0",
+                            "type": "promql",
+                            "code": "A",
+                            "promqlCode": 1
+                        }
+                    }
+                ],
+                "type": "sequence"
+            }
+        ],
+        "groups": [
+            {
+                "name": "概览 【$cluster】"
+            },
+            {
+                "name": "CPU"
+            },
+            {
+                "name": "内存"
+            },
+            {
+                "name": "网络"
+            },
+            {
+                "name": "存储"
+            },
+            {
+                "name": "Kubernetes"
+            }
+        ]
+    }
+}

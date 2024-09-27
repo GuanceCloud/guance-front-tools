@@ -1,0 +1,106 @@
+{
+  "title": "test",
+  "dashboardType": "CUSTOM",
+  "dashboardExtend": {},
+  "dashboardMapping": [],
+  "dashboardOwnerType": "node",
+  "iconSet": {},
+  "dashboardBindSet": [],
+  "thumbnail": "",
+  "tagInfo": [],
+  "summary": "",
+  "main": {
+    "vars": [],
+    "charts": [
+      {
+        "extend": {
+          "settings": {
+            "alias": [],
+            "units": [],
+            "colors": [],
+            "levels": [],
+            "slimit": 20,
+            "showLine": false,
+            "unitType": "global",
+            "chartType": "line",
+            "fixedTime": "",
+            "isPercent": false,
+            "openStack": false,
+            "precision": "2",
+            "showLabel": false,
+            "showTitle": true,
+            "stackType": "time",
+            "titleDesc": "",
+            "globalUnit": [],
+            "isSampling": true,
+            "compareType": [],
+            "openCompare": false,
+            "yAxixMaxVal": null,
+            "yAxixMinVal": null,
+            "connectNulls": true,
+            "legendValues": "",
+            "timeInterval": "auto",
+            "legendPostion": "none",
+            "maxPointCount": null,
+            "sorderByOrder": "desc",
+            "xAxisShowType": "time",
+            "isTimeInterval": true,
+            "changeWorkspace": false,
+            "currentChartType": "sequence",
+            "showFieldMapping": false,
+            "onlyShowGroupName": false,
+            "openThousandsSeparator": true,
+            "mainMeasurementQueryCode": "B"
+          },
+          "fixedTime": "",
+          "isRefresh": false
+        },
+        "group": {
+          "name": null
+        },
+        "name": "新建图表",
+        "pos": {
+          "h": 10,
+          "w": 8,
+          "x": 3,
+          "y": 0
+        },
+        "type": "sequence",
+        "queries": [
+          {
+            "name": "",
+            "type": "sequence",
+            "unit": "",
+            "color": "",
+            "qtype": "promql",
+            "query": {
+              "q": "sum(kube_namespace_labels{cluster=\"#{cluster}\"})",
+              "code": "B",
+              "type": "promql",
+              "funcList": [],
+              "promqlCode": 1
+            },
+            "datasource": "dataflux"
+          },
+          {
+            "name": "",
+            "type": "sequence",
+            "unit": "",
+            "color": "",
+            "qtype": "promql",
+            "query": {
+              "q": "sum(kube_pod_container_status_running{cluster=\"#{cluster}\"})",
+              "code": "A",
+              "type": "promql",
+              "funcList": [],
+              "promqlCode": 2
+            },
+            "datasource": "dataflux"
+          }
+        ]
+      }
+    ],
+    "groups": [],
+    "type": "template"
+  }
+}

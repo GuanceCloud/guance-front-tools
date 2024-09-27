@@ -110,6 +110,22 @@ function sortPanelItemsByRowCol(panels: Panel[]): Panel[] {
     return -1
   })
 }
+// 数字转成abc
+function tenToTweenty(source: number = 1): string {
+  let numArr: any = []
+  source--
+  do {
+    numArr.push(source % 26)
+    source = Math.floor(source / 26)
+  } while (source > 0)
+  return numArr
+    .reverse()
+    .map((item: number, index: number) => {
+      return String.fromCharCode(item + 97 + (index === numArr.length - 1 ? 0 : -1))
+    })
+    .join('')
+    .toUpperCase()
+}
 function getGridH(h: number, rowHeight: number, margin: number) {
   return Math.round(h * rowHeight + Math.max(0, 2 * (h - 1)) * margin)
 }
@@ -140,9 +156,11 @@ function covertPanelToGuanceChart(grafanaPanel: Panel, rowPanel: RowPanel | unde
   }
   const queries: GuanceChartQueries = []
   if (targets && targets.length) {
+    let currentIndex = 0
     targets.forEach((_target) => {
       const queryStr: string | unknown = _target.expr || _target.query
       if (!queryStr) return
+      currentIndex++
       const queryItem: GuanceChartQueryItem = {
         datasource: 'dataflux',
         qtype: 'promql',
@@ -150,6 +168,8 @@ function covertPanelToGuanceChart(grafanaPanel: Panel, rowPanel: RowPanel | unde
         query: {
           q: replaceVariableStr(queryStr as string),
           type: 'promql',
+          code: tenToTweenty(currentIndex),
+          promqlCode: currentIndex,
         },
       }
       queries.push(queryItem)
